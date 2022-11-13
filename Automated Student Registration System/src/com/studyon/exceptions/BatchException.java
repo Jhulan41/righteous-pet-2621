@@ -1,14 +1,13 @@
 package com.studyon.exceptions;
 
-public class CourseException extends Exception{
-	
-	public CourseException() {
+public class BatchException extends Exception{
+
+	public BatchException() {
 		// TODO Auto-generated constructor stub
 	}
-	public CourseException(String message) {
+	public BatchException(String message) {
 		// TODO Auto-generated constructor stub
 		super(message);
-		
 	}
-
+	
 }

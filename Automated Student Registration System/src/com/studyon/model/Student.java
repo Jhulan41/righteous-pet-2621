@@ -66,6 +66,4 @@ public class Student {
 		return "Student [roll=" + roll + ", name=" + name + ", address=" + address + ", email=" + email + ", password="
 				+ password + "]";
 	}
-	
-	
 }
