@@ -1,7 +1,6 @@
 package com.studyon.exceptions;
 
 public class AdminException extends Exception{
-	
 	public AdminException() {
 		// TODO Auto-generated constructor stub
 	}

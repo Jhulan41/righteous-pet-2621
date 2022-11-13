@@ -1,20 +1,18 @@
 package com.studyon.model;
 
 public class Course {
-	
-
 	private int cid;
 	private String courseName;
 	private String session;
 	private int numberOfBatches;
-	private Double courseFee;
+	private int courseFee;
 	private String courseDuration;
 	
 	public Course() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Course(int cid, String courseName, String session, int numberOfBatches, Double courseFee,
+	public Course(int cid, String courseName, String session, int numberOfBatches, int courseFee,
 			String courseDuration) {
 		super();
 		this.cid = cid;
@@ -57,11 +55,11 @@ public class Course {
 		this.numberOfBatches = numberOfBatches;
 	}
 
-	public Double getCourseFee() {
+	public int getCourseFee() {
 		return courseFee;
 	}
 
-	public void setCourseFee(Double courseFee) {
+	public void setCourseFee(int courseFee) {
 		this.courseFee = courseFee;
 	}
 
@@ -78,7 +76,6 @@ public class Course {
 		return "Course [cid=" + cid + ", courseName=" + courseName + ", session=" + session + ", numberOfBatches="
 				+ numberOfBatches + ", courseFee=" + courseFee + ", courseDuration=" + courseDuration + "]";
 	}
-	
 	
 
 }
