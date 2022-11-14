@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import com.studyon.dbutility.DBUtil;
 import com.studyon.exceptions.AdminException;
 
-public class AdminDaoImpl implements AdminDao{
+public class AdminDaoimpl implements AdminDao{
 
 	@Override
 	public boolean checkAdminAuthenticity(String username, String password) throws AdminException {

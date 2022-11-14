@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.studyon.dao.AdminDao;
-import com.studyon.dao.AdminDaoImpl;
+import com.studyon.dao.AdminDaoimpl;
 import com.studyon.dao.BatchDao;
 import com.studyon.dao.BatchDaoImpl;
 import com.studyon.dao.CourseDao;
@@ -279,7 +279,7 @@ private static void availableCourses() {
 		System.out.println("Enter Password :");
 		password = sc.next();
 		
-		AdminDao dao = new AdminDaoImpl();
+		AdminDao dao = new AdminDaoimpl();
 		
 		if(dao.checkAdminAuthenticity(userName, password)) {
 			
@@ -308,7 +308,7 @@ private static void availableCourses() {
 			 System.out.println("\nWelcome to Admin panel ");
 			 System.out.println("Please Enter a Choice : ");
 			 
-			 System.out.println("\n 1: To see All Course Details \n 2: Update Fee of a course \n 3: Delete a course  \n 4: Search information about a course \n 5: Create a batch under a course \n 6: Allocate student in a batch under a course  \n 7: View the students of a particular batch \n 8: Exit");
+			 System.out.println("\n 1: To see All Course and Batch Details \n 2: To add a new course \n 3: Update Fee of a course \n 4: Delete a course  \n 5: Search information about a course \n 6: Create a batch under a course \n 7: Allocate student in a batch under a course  \n 8: View the students of a particular batch \n 9: Exit");
 			 int option = 0; 
 			 Scanner sc = new Scanner(System.in);
 			 option = sc.nextInt();
@@ -317,37 +317,41 @@ private static void availableCourses() {
 			 case 1:
 				 allCourseDetails();
 				 break;
-				 
+
 			 case 2:
+				 addACourse();
+				 break;
+				 
+			 case 3:
 				 updateFeeOf_A_Course();
 				 break;
 				 
 				 
-			 case 3:
+			 case 4:
 				 deleteACourse();
 				 break;
 				 
 				 
-			 case 4: 
+			 case 5: 
 				 searchACourse();
 				 break;
 				 
 			 
-			 case 5:
+			 case 6:
 				 createABatchUnderACourse();
 				 break;
 				 
 				 
-			 case 6:
+			 case 7:
 				 allocateAStudentToABatchUnderACourse();
 				 break;
 				 
 				 
-			 case 7:  
+			 case 8:  
 				 viewAllStudentsFromAbatch();
 				 break;
 			 
-			 case 8: 
+			 case 9: 
 				 System.out.println("Log out Successfully");
 				 choice = false;
 			 
@@ -359,6 +363,32 @@ private static void availableCourses() {
 		 
 		
 	}
+private static void addACourse() {
+	Scanner sc = new Scanner(System.in);
+	
+	 
+	System.out.println(" Enter the CourseName : ");
+	String CourseName = sc.next();	 
+	System.out.println("Enter the Session Name- Summer or Winter : ");
+	String Session = sc.next();		
+	System.out.println("Enter the  courseFee: ");
+	int courseFee = sc.nextInt();
+	System.out.println("Enter the courseDuration : ");
+	String courseDuration =sc.next();	 	 
+	
+	CourseDao cd = new CourseDaoImpl();
+	
+	try {
+		String str = cd.addACourse(CourseName, Session, courseFee, courseDuration);
+		System.out.println(str);
+	} catch (CourseException e) {
+		// TODO Auto-generated catch block
+		System.out.println(e.getMessage());
+	}
+	
+	
+}
+
 private static void viewAllStudentsFromAbatch() {
 	Scanner sc = new Scanner(System.in);
 	System.out.println("\n Enter the BatchID : ");
@@ -500,11 +530,15 @@ private static void updateFeeOf_A_Course() {
 private static void allCourseDetails() {
 	
 	CourseDao csDao = new CourseDaoImpl();
+	BatchDao bt = new BatchDaoImpl();
 	
 	try {
 		List<Course> courses = csDao.getAllcoursedetails();
 		courses.forEach(c -> System.out.println(c));
-	} catch (CourseException e) {
+		List<Batch> batches = bt.getAllbatchdetails();
+		batches.forEach(b -> System.out.println(b));
+		
+	} catch (CourseException | BatchException e) {
 		 
 		System.out.println(e.getMessage());
 	}
