@@ -223,4 +223,35 @@ public class CourseDaoImpl implements CourseDao{
 		return message;
 	}
 
+	@Override
+	public String addACourse(String courseName, String session, int courseFee, String courseDuration)
+			throws CourseException {
+		String message = "Course can't be added";
+		
+		try(Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps=conn.prepareStatement("insert into course(courseName,session,numberOfBatches,courseFee,courseDuration) values(?,?,?,?,?)");
+			
+			ps.setString(1, courseName);
+			ps.setString(2, session);
+			ps.setInt(3, 0);
+			ps.setInt(4, courseFee);
+			ps.setString(5, courseDuration);
+			 
+			int x = ps.executeUpdate();
+			
+			if(x>0) {
+				message = "Course added Successfully";
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new CourseException(e.getMessage());
+		}
+		
+		
+		
+		return message;
+	}
+
 }
